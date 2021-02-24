@@ -1,0 +1,89 @@
+TITLE
+
+* Set the defaults for precision simulations
+DEFAULTS                                                              PRECISIO
+* Define the beam characteristics
+BEAM           -12.0                           5.0       0.0      -1.0ELECTRON
+* Define the beam position
+BEAMPOS          0.0       0.0      -10.
+PHYSICS           1.                                                  COALESCE
+PHYSICS           3.                                                  EVAPORAT
+PHOTONUC          1.
+PHOTONUC          1.                                                  ELECTNUC
+GEOBEGIN                                                              COMBNAME
+    0    0          
+* Black body
+SPH blkbody    0.0 0.0 0.0 100000.0
+* Void sphere
+SPH void       0.0 0.0 0.0 10000.0
+* Cylindrical target
+RCC target     0.0 0.0 0.0 0.0 0.0 10.0 5.0
+END
+* Black hole
+BLKBODY      5 +blkbody -void
+* Void around
+VOID         5 +void -target
+* Target
+TARGET       5 +target
+END
+GEOEND
+* ..+....1....+....2....+....3....+....4....+....5....+....6....+....7..
+ASSIGNMA    BLCKHOLE   BLKBODY
+ASSIGNMA      VACUUM      VOID
+ASSIGNMA      COPPER    TARGET
+* Requests simulation of radioactive decays and sets the corresponding
+* biasing and transport conditions
+RADDECAY          1.        1.                       1008000
+* Define an irradiation profile for radioactive decay calculations
+IRRPROFI     604800.    5.3E14   345600.       0.0   604800.    5.3E14
+IRRPROFI     345600.       0.0   604800.    5.3E14
+* Times: 1h, 12h, 24h, 1week, 4weeks, 6months
+DCYTIMES       3600.    43200.    86400.   604800.  2419200. 15811200.
+LAM-BIAS                  0.02              PHOTON    PHOTON
+* Associates selected scoring detectors with user-defined decay times
+DCYSCORE          1.                         Res1h     Res1h          RESNUCLE
+DCYSCORE          1.                        Dose1h    Dose1h          USRBIN
+AUXSCORE      USRBIN                        Dose1h    Dose1h          EWT74
+RESNUCLE          3.      -21.                        TARGET          Res1h
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose1h
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+* Associates selected scoring detectors with user-defined decay times
+DCYSCORE          2.                        Res12h    Res12h          RESNUCLE
+DCYSCORE          2.                       Dose12h   Dose12h          USRBIN
+AUXSCORE      USRBIN                       Dose12h   Dose12h          EWT74
+RESNUCLE          3.      -21.                        TARGET          Res12h
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose12h
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+* Associates selected scoring detectors with user-defined decay times
+DCYSCORE          3.                        Res24h    Res24h          RESNUCLE
+DCYSCORE          3.                       Dose24h   Dose24h          USRBIN
+AUXSCORE      USRBIN                       Dose24h   Dose24h          EWT74
+RESNUCLE          3.      -21.                        TARGET          Res24h
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose24h
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+* Associates selected scoring detectors with user-defined decay times
+DCYSCORE          4.                        Res01w    Res01w          RESNUCLE
+DCYSCORE          4.                       Dose01w   Dose01w          USRBIN
+AUXSCORE      USRBIN                       Dose01w   Dose01w          EWT74
+RESNUCLE          3.      -21.                        TARGET          Res01w
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose01w
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+* Associates selected scoring detectors with user-defined decay times
+DCYSCORE          5.                        Res04w    Res04w          RESNUCLE
+DCYSCORE          5.                       Dose04w   Dose04w          USRBIN
+AUXSCORE      USRBIN                       Dose04w   Dose04w          EWT74
+RESNUCLE          3.      -21.                        TARGET          Res04w
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose04w
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+* Associates selected scoring detectors with user-defined decay times
+DCYSCORE          6.                        Res06m    Res06m          RESNUCLE
+DCYSCORE          6.                       Dose06m   Dose06m          USRBIN
+AUXSCORE      USRBIN                       Dose06m   Dose06m          EWT74
+RESNUCLE          3.      -21.                        TARGET          Res06m
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose06m
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+* Set the random number seed
+RANDOMIZ         1.0
+* Set the number of primary histories to be simulated in the run
+START         10000.
+STOP
