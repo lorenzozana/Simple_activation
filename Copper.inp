@@ -1,15 +1,15 @@
 TITLE
 
 * Set the defaults for precision simulations
-DEFAULTS                                                              PRECISIO
+DEFAULTS                                                              NEW-DEFA
 * Define the beam characteristics
 BEAM           -12.0                           5.0       0.0      -1.0ELECTRON
 * Define the beam position
-BEAMPOS          0.0       0.0      -10.
+BEAMPOS          0.0       0.0      -10.       0.0       0.0
 PHYSICS           1.                                                  COALESCE
 PHYSICS           3.                                                  EVAPORAT
-PHOTONUC          1.
-PHOTONUC          1.                                                  ELECTNUC
+PHOTONUC          1.                      BLCKHOLE  @LASTMAT
+PHOTONUC          1.                        COPPER    COPPER          ELECTNUC
 GEOBEGIN                                                              COMBNAME
     0    0          
 * Black body
@@ -28,6 +28,13 @@ TARGET       5 +target
 END
 GEOEND
 * ..+....1....+....2....+....3....+....4....+....5....+....6....+....7..
+MATERIAL                             18.                              CW95
+COMPOUND       -0.95  TUNGSTEN    -0.015    COPPER    -0.035    NICKELCW95
+MATERIAL                           11.35                              PbSb
+COMPOUND       -0.98      LEAD     -0.02  ANTIMONY                    PbSb
+MATERIAL         51.               6.691                              ANTIMONY
+MAT-PROP                           487.0  ANTIMONY
+STERNHEI      5.6241    0.3189    3.3489   0.16652    2.9319      0.14ANTIMONY
 ASSIGNMA    BLCKHOLE   BLKBODY
 ASSIGNMA      VACUUM      VOID
 ASSIGNMA      COPPER    TARGET
@@ -85,5 +92,5 @@ USRBIN           0.0       0.0     -100.       20.        1.       20. &
 * Set the random number seed
 RANDOMIZ         1.0
 * Set the number of primary histories to be simulated in the run
-START         10000.
+START        100000.
 STOP

@@ -1,4 +1,4 @@
-#!/opt/flair/flair-2.5/flair
+#!/usr/local/flair/flair
 # FLUKA Project file
 Version: 2
 Title: 
@@ -7,10 +7,16 @@ Exec: coll_activation.exe
 Submit: *Default
 Tabs: 0.1 0.32 0.56 0.81 1.0
 Page: Flair
+Source: magfld.f
 DefMain: True
 LinkPrg: ldpmqmd
 F77bound: True
 F77dline: False
+
+# Properties
+Properties: Input
+	REGION/VOID/@select: 1
+End
 
 # Run information
 Run: <default>
@@ -18,7 +24,7 @@ Run: <default>
 	Last:     5
 	Status:   3
 	Pid:      0
-	StartRun: 1613512165
+	StartRun: 1614740234
 
 	# USRxxx data file: Copper_21.rnc
 	Data: \I_\U.\e
@@ -37,22 +43,57 @@ Run: <default>
 	End
 End
 
+# Material
+Material: CW95
+	alpha: 0
+	color: #5090D0
+	fuzz: 0.0
+	ior: 1.0
+	shine: 10.0
+	specular: 0.0
+End
+
+# Material
+Material: PbSb
+	alpha: 0
+	color: #603090
+	fuzz: 0.0
+	ior: 1.0
+	shine: 10.0
+	specular: 0.0
+End
+
+# Material
+Material: ANTIMONY
+	alpha: 0
+	color: #E09090
+	fuzz: 0.0
+	ior: 1.0
+	shine: 10.0
+	specular: 0.0
+End
+
 # Geometry Information
 Geometry:
-	Frame.bsplit: 0.5
+	Frame.bsplit: 0.01
 	Frame.tsplit: 0.5
-	Frame.vsplit: 0.5
+	Frame.vsplit: 0.01
 
 	# Layer
 	Layer: Media
 		Options.shortcut: F3
 		Palette: True
 		Palette._visible: True
+		Palette.cpd: 5
+		Palette.max: 10000000.0
+		Palette.min: 1.0
+		Palette.n: 35
 		Show._visible: True
 		Usrbin: True
 		Usrbin._visible: True
+		Usrbin.det: 6
 		Usrbin.file: Copper_23.bnn
-		Usrbin.norm: 1.0
+		Usrbin.norm: 3.6E-4
 		layer: Media
 	End
 End
@@ -65,7 +106,7 @@ Plot: Red
 	basisv: 0 1 0
 	boundaries: 1
 	cbcolors: 0
-	cblog: False
+	cblog: 0
 	cbpalette: FLUKA
 	cbround: 0
 	cbtics: 0
@@ -79,13 +120,13 @@ Plot: Red
 	origin: 0 0 0
 	subtype: Material
 	title: GeoViewer Red plot
-	x2log: False
+	x2log: 0
 	x2tics: 0
-	xlog: False
-	y2log: False
+	xlog: 0
+	y2log: 0
 	y2tics: 0
-	ylog: False
-	zlog: False
+	ylog: 0
+	zlog: 0
 	ztics: 0
 End
 
@@ -113,7 +154,7 @@ Plot: Blue
 	basisv: 0 1 0
 	boundaries: 1
 	coord: Z-Y
-	extends: 144 108
+	extends: 144 12322.3
 	labels: 1
 	layer: Media
 	origin: 0 -42.8814 6.6729
@@ -129,80 +170,296 @@ Plot: Magenta
 	basisv: 0 1 0
 	boundaries: 1
 	coord: X-Y
-	extends: 100 75
+	extends: 358.318 249.825
 	labels: 1
 	layer: Media
-	origin: 0 0 0
+	origin: -59.2012 -17.1633 0
 	subtype: Material
 	title: GeoViewer Magenta plot
 End
 
-# RESNUCLE plot "RESNUCLE Copper 21"
+# RESNUCLE plot "Residual Nuclei Copper"
 Plot: Copper_21_plot
 	Format: .eps
 	Type:   RESNUCLE
 	cbcolors: 0
-	cblog: False
+	cblog: 0
 	cbpalette: FLUKA
 	cbround: 0
 	cbtics: 0
 	cpd: 0
 	datafile: Copper_21.rnc
-	det: 4
+	det: 6
 	grid: 0
 	index: 0
 	lw.0: 0
-	plot: A
+	plot: A/Z
 	ps.0: 0
-	title: RESNUCLE Copper 21
+	title: Residual Nuclei Copper
 	with.0: errorbars
-	x2log: False
+	x2log: 0
 	x2tics: 0
-	xlog: False
-	y2log: False
+	xlabel: A
+	xlog: 0
+	y2log: 0
 	y2tics: 0
-	ylog: False
-	zlog: False
+	ylabel: Z
+	ylog: 0
+	zlog: 0
 	ztics: 0
 End
 
-# USRBIN plot "USRBIN Copper 23"
+# USRBIN plot "Copper 6months activation (mrem/h)"
 Plot: Copper_23_plot
-	Format: .eps
+	Format: .jpg
 	Type:   USRBIN
 	axes: Auto
 	cbcolors: 30
-	cblog: True
+	cblog: 1
 	cbpalette: FLUKA
 	cbround: 0
 	cbtics: 1
 	cpd: 0
 	datafile: Copper_23.bnn
-	det: 1
+	det: 6
 	errors: 0
 	geo: -Auto-
 	grid: 0
 	hist: 2D Projection
 	index: 0
-	int: 2006446.4121775581
+	int: 25363420779450.801
 	lw.0: 0
-	max: 53.8121643
-	min: 7.75291119E-04
+	max: 465010976.
+	min: 255462.578
+	norm: 3.6E-4
+	proj: Y
+	ps.0: 0
+	pt.0: 0
+	swap: 0
+	title: Copper 6months activation (mrem/h)
+	with.0: errorbars
+	x2log: 0
+	x2tics: 0
+	xlabel: X(cm)
+	xlog: 0
+	xrebin: 1
+	y2log: 0
+	y2tics: 0
+	ylabel: Y(cm)
+	ylog: 0
+	yrebin: 1
+	zlog: 0
+	zrebin: 1
+	ztics: 0
+End
+
+# USRBIN plot "Tantalum 6months activation (mrem/h)"
+Plot: Tant_23_plot
+	Format: .jpg
+	Type:   USRBIN
+	axes: Auto
+	bxmax: 20.
+	bxmin: 0.
+	cbcolors: 30
+	cblog: 1
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 1
+	cpd: 0
+	datafile: Tant_23.bnn
+	det: 6
+	errors: 0
+	geo: -Auto-
+	grid: 0
+	hist: 2D Projection
+	index: 0
+	int: 7432540362671.2041
+	lw.0: 0
+	max: 799526080.
+	min: 729560.125
+	norm: 3.6E-4
+	proj: Y
+	ps.0: 0
+	pt.0: 0
+	swap: 0
+	title: Tantalum 6months activation (mrem/h)
+	with.0: errorbars
+	x2log: 0
+	x2tics: 0
+	xlabel: X(cm)
+	xlog: 0
+	xrebin: 1
+	y2log: 0
+	y2tics: 0
+	ylabel: Y(cm)
+	ylog: 0
+	yrebin: 1
+	zlog: 0
+	zrebin: 1
+	ztics: 0
+End
+
+# RESNUCLE plot "Residual Nuclei Copper"
+Plot: Tant_21_plot01
+	Format: .eps
+	Type:   RESNUCLE
+	cbcolors: 0
+	cblog: 0
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 0
+	cpd: 0
+	datafile: Tant_21.rnc
+	det: 6
+	grid: 0
+	index: 0
+	lw.0: 0
+	plot: A/Z
+	ps.0: 0
+	title: Residual Nuclei Copper
+	with.0: errorbars
+	x2log: 0
+	x2tics: 0
+	xlabel: A
+	xlog: 0
+	y2log: 0
+	y2tics: 0
+	ylabel: Z
+	ylog: 0
+	zlog: 0
+	ztics: 0
+End
+
+# RESNUCLE plot "Residual Nuclei Copper"
+Plot: Pb_21_plot02
+	Format: .eps
+	Type:   RESNUCLE
+	cbcolors: 0
+	cblog: 0
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 0
+	cpd: 0
+	datafile: Pb_21.rnc
+	det: 6
+	grid: 0
+	index: 0
+	lw.0: 0
+	plot: A/Z
+	ps.0: 0
+	title: Residual Nuclei Copper
+	with.0: errorbars
+	x2log: 0
+	x2tics: 0
+	xlabel: A
+	xlog: 0
+	y2log: 0
+	y2tics: 0
+	ylabel: Z
+	ylog: 0
+	zlog: 0
+	ztics: 0
+End
+
+# RESNUCLE plot "Residual Nuclei Copper"
+Plot: PbSb_21_plot03
+	Format: .eps
+	Type:   RESNUCLE
+	cbcolors: 0
+	cblog: 0
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 0
+	cpd: 0
+	datafile: PbSb_21.rnc
+	det: 6
+	grid: 0
+	index: 0
+	lw.0: 0
+	plot: A/Z
+	ps.0: 0
+	title: Residual Nuclei Copper
+	with.0: errorbars
+	x2log: 0
+	x2tics: 0
+	xlabel: A
+	xlog: 0
+	y2log: 0
+	y2tics: 0
+	ylabel: Z
+	ylog: 0
+	zlog: 0
+	ztics: 0
+End
+
+# RESNUCLE plot "Residual Nuclei Copper"
+Plot: CW95_21_plot04
+	Format: .eps
+	Type:   RESNUCLE
+	cbcolors: 0
+	cblog: 0
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 0
+	cpd: 0
+	datafile: CW95_21.rnc
+	det: 1
+	grid: 0
+	index: 0
+	lw.0: 0
+	plot: A/Z
+	ps.0: 0
+	title: Residual Nuclei Copper
+	with.0: errorbars
+	x2log: 0
+	x2tics: 0
+	xlabel: A
+	xlog: 0
+	y2log: 0
+	y2tics: 0
+	ylabel: Z
+	ylog: 0
+	zlog: 0
+	ztics: 0
+End
+
+# USRBIN plot "USRBIN Copper 23"
+Plot: Tant_23_plot01
+	Format: .eps
+	Type:   USRBIN
+	axes: Auto
+	cbcolors: 30
+	cblog: 1
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 1
+	cpd: 0
+	datafile: Copper_23.bnn
+	det: 6
+	errors: 0
+	geo: -Auto-
+	grid: 0
+	hist: 2D Projection
+	index: 0
+	int: 25363420779450.801
+	lw.0: 0
+	max: 465010976.
+	min: 255462.578
 	proj: Y
 	ps.0: 0
 	pt.0: 0
 	swap: 0
 	title: USRBIN Copper 23
 	with.0: errorbars
-	x2log: False
+	x2log: 0
 	x2tics: 0
-	xlog: False
+	xlog: 0
 	xrebin: 1
-	y2log: False
+	y2log: 0
 	y2tics: 0
-	ylog: False
+	ylog: 0
 	yrebin: 1
-	zlog: False
+	zlog: 0
 	zrebin: 1
 	ztics: 0
 End
