@@ -5,7 +5,7 @@ DEFAULTS                                                              NEW-DEFA
 * Define the beam characteristics
 BEAM           -12.0                           5.0       0.0      -1.0ELECTRON
 * Define the beam position
-BEAMPOS          0.0       0.0      -10.       0.0       0.0
+BEAMPOS          0.0       0.0        0.       0.0       0.0
 PHYSICS           1.                                                  COALESCE
 PHYSICS           3.                                                  EVAPORAT
 PHOTONUC          1.                      BLCKHOLE  @LASTMAT
@@ -36,7 +36,7 @@ MATERIAL         51.               6.691                              ANTIMONY
 MAT-PROP                           487.0  ANTIMONY
 STERNHEI      5.6241    0.3189    3.3489   0.16652    2.9319      0.14ANTIMONY
 ASSIGNMA    BLCKHOLE   BLKBODY
-ASSIGNMA      VACUUM      VOID
+ASSIGNMA         AIR      VOID
 ASSIGNMA      COPPER    TARGET
 * Requests simulation of radioactive decays and sets the corresponding
 * biasing and transport conditions
@@ -49,11 +49,24 @@ DCYTIMES       3600.    43200.    86400.   604800.  2419200. 15811200.
 LAM-BIAS                  0.02              PHOTON    PHOTON
 * Associates selected scoring detectors with user-defined decay times
 DCYSCORE          1.                         Res1h     Res1h          RESNUCLE
-DCYSCORE          1.                        Dose1h    Dose1h          USRBIN
+DCYSCORE          1.                        Dose1h     D_g1h          USRBIN
+DCYSCORE          1.                        Sp_e6m    Sp_g1h          USRBDX
 AUXSCORE      USRBIN                        Dose1h    Dose1h          EWT74
+AUXSCORE      USRBIN    PHOTON               D_e1h     D_e1h          EWT74
+AUXSCORE      USRBIN  ELECTRON               D_g1h     D_g1h          EWT74
 RESNUCLE          3.      -21.                        TARGET          Res1h
 USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose1h
 USRBIN           0.0       0.0     -100.       20.        1.       20. &
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.D_e1h
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.D_g1h
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+USRBDX           99.   ALPHA-D      -25.    TARGET      VOID          Sp_a1h
+USRBDX         0.010  0.000001      100.                            1. &
+USRBDX           99.  SQBETA-D      -25.    TARGET      VOID          Sp_e1h
+USRBDX         0.010  0.000001      100.                            1. &
+USRBDX           99.    PHOTON      -25.    TARGET      VOID          Sp_g1h
+USRBDX         0.010  0.000001      100.                            1. &
 * Associates selected scoring detectors with user-defined decay times
 DCYSCORE          2.                        Res12h    Res12h          RESNUCLE
 DCYSCORE          2.                       Dose12h   Dose12h          USRBIN
@@ -84,11 +97,24 @@ USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose04w
 USRBIN           0.0       0.0     -100.       20.        1.       20. &
 * Associates selected scoring detectors with user-defined decay times
 DCYSCORE          6.                        Res06m    Res06m          RESNUCLE
-DCYSCORE          6.                       Dose06m   Dose06m          USRBIN
+DCYSCORE          6.                       Dose06m     D_g6m          USRBIN
+DCYSCORE          6.                        Sp_a6m    Sp_g6m          USRBDX
 AUXSCORE      USRBIN                       Dose06m   Dose06m          EWT74
+AUXSCORE      USRBIN  ELECTRON               D_e6m     D_e6m          EWT74
+AUXSCORE      USRBIN    PHOTON               D_g6m     D_g6m          EWT74
 RESNUCLE          3.      -21.                        TARGET          Res06m
 USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.Dose06m
 USRBIN           0.0       0.0     -100.       20.        1.       20. &
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.D_e6m
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+USRBIN           11.   DOSE-EQ      -23.      200.       0.0      100.D_g6m
+USRBIN           0.0       0.0     -100.       20.        1.       20. &
+USRBDX           99.   ALPHA-D      -25.    TARGET      VOID          Sp_a6m
+USRBDX         0.010  0.000001      100.                            1. &
+USRBDX           99.  SQBETA-D      -25.    TARGET      VOID          Sp_e6m
+USRBDX         0.010  0.000001      100.                            1. &
+USRBDX           99.    PHOTON      -25.    TARGET      VOID          Sp_g6m
+USRBDX         0.010  0.000001      100.                            1. &
 * Set the random number seed
 RANDOMIZ         1.0
 * Set the number of primary histories to be simulated in the run
