@@ -37,7 +37,7 @@ MAT-PROP                           487.0  ANTIMONY
 STERNHEI      5.6241    0.3189    3.3489   0.16652    2.9319      0.14ANTIMONY
 ASSIGNMA    BLCKHOLE   BLKBODY
 ASSIGNMA         AIR      VOID
-ASSIGNMA      COPPER    TARGET
+ASSIGNMA    TANTALUM    TARGET
 * Requests simulation of radioactive decays and sets the corresponding
 * biasing and transport conditions
 RADDECAY          1.        1.                       1008000
